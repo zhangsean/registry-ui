@@ -1,6 +1,5 @@
 <?php
 include_once 'common.php';
-include_once 'config.php';
 
 $image = $_GET['image'];
 if (empty($image)) {

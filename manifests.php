@@ -1,6 +1,5 @@
 <?php
 include_once 'common.php';
-include_once 'config.php';
 
 $image = empty($_GET['image']) ? '' : $_GET['image'];
 $tag = empty($_GET['tag']) ? '' : $_GET['tag'];

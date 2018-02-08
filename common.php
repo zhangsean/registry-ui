@@ -1,7 +1,8 @@
 <?php
-/**
-* Http Common Toolkit
-*/
+
+$registryWeb = empty($_ENV['REGISTRY_WEB']) ? 'localhost:5000' : $_ENV['REGISTRY_WEB'];
+$registryAPI = empty($_ENV['REGISTRY_API']) ? 'http://localhost:5000/v2' : $_ENV['REGISTRY_API'];
+
 $headerStr;
 $headerKey;
 function httpGet($url, $headKey = '', $headerOnly = false) {
