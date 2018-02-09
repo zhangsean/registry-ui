@@ -12,7 +12,7 @@ if (isset($json['errors'])) {
 	echo $json['errors'][0]['message'];
 	return;
 }
-echo "<h1>Registry Web</h1>";
+echo "<h1>Tiny Registry UI</h1>";
 echo "<b>Repository</b><br/>$registryWeb/".$json['name'];
 echo "<h3>Tags</h3><hr/>";
 echo "<table border=0 cellspacing=0 cellpadding=0>";

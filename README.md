@@ -1,2 +1,2 @@
-# RegistryUI
-A tiny docker registry web ui by PHP.
+# Tiny Registry UI
+A tiny docker Tiny Registry UI ui by PHP.

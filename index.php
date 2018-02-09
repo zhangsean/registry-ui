@@ -18,7 +18,7 @@ if (empty($json['repositories'])) {
 	echo "Empty repository";
 	return;
 }
-echo "<h1>Registry Web</h1>";
+echo "<h1>Tiny Registry UI</h1>";
 echo "<b>Registry</b><br/>".$registryWeb."</h4>";
 echo "<h2>Images</h2><hr/>";
 if (!empty($link)) {
