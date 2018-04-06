@@ -63,15 +63,19 @@ function getRepInfo($image) {
 	$url = "/$image/tags/list";
 	$json = httpGet($url);
 	$totalSize = 0;
-	foreach ($json['tags'] as $tag) {
-		$totalSize += getTagInfo($image, $tag)['Size'];
+	$totalTags = 0;
+	if (!empty($json['tags'])) {
+		foreach ($json['tags'] as $tag) {
+			$totalSize += getTagInfo($image, $tag)['Size'];
+			$totalTags += 1;
+		}
 	}
 	return array(
-		'Tags' => count($json['tags']),
+		'Tags' => $totalTags,
 		'Size' => $totalSize
 	);
 }
-//size()  统计文件大小
+// 人性化显示文件大小
 function size($byte) {
     if($byte < 1024) {
       $unit="B";
