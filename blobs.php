@@ -8,7 +8,7 @@ if (empty($image) || empty($digest)) {
 	echo "Image name and digest must be set.";
 	return;
 }
-echo "<h1>Tiny Registry UI</h1>";
+echo "<h1>Docker Registry UI</h1>";
 echo "<b>Image</b><br/>$registryWeb/$image:$tag";
 echo "<br/><b>Layer</b><br/>$digest";
 echo "<h3>Image Blob</h3><hr/>";
