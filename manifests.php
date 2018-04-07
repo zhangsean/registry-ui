@@ -14,7 +14,7 @@ if (isset($json['errors'])) {
 	return;
 }
 echo "<h1>Docker Registry UI</h1>";
-echo "<b>Image</b><br/>$registryWeb/".$json['name'].":$tag";
+echo "<b>Image</b><br/><a href='$baseUrl'>$registryWeb</a>/<a href='$baseUrl/tags.php?image=$image'>".$json['name']."</a>:<a href=''>$tag</a>";
 echo "<h3>Layers</h3><hr/>";
 echo "<table border=0 cellspacing=0 cellpadding=0>";
 echo "<tr><th width=50>Layer</th><th width=150>Image ID</th><th width=100>Size</th><th width=200>Created</th><th width=100>Author</th><th width=1000>Cmd</th></tr>";

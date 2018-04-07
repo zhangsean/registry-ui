@@ -19,7 +19,7 @@ if (empty($json['repositories'])) {
 	return;
 }
 echo "<h1>Docker Registry UI</h1>";
-echo "<b>Registry</b><br/>".$registryWeb."</h4>";
+echo "<b>Registry</b><br/><a href='$baseUrl'>".$registryWeb."</a></h4>";
 echo "<h2>Images</h2><hr/>";
 if (!empty($link)) {
 	echo "<a href='?$link'>Next Page</a><br/><br/>";
