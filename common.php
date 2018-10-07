@@ -2,7 +2,6 @@
 
 $registryWeb = empty($_ENV['REGISTRY_WEB']) ? 'localhost:5000' : $_ENV['REGISTRY_WEB'];
 $registryAPI = empty($_ENV['REGISTRY_API']) ? 'http://localhost:5000/v2' : $_ENV['REGISTRY_API'];
-$baseUrl = 'http://'.$_SERVER['HTTP_HOST'];
 $showImageSize = empty($_ENV['SHOW_IMAGE_SIZE']) ? false : $_ENV['SHOW_IMAGE_SIZE'];
 
 $headerStr;
@@ -42,7 +41,7 @@ function getBlobSize($image, $digest) {
     global $registryAPI, $headerStr;
     $url = "/$image/blobs/$digest";
     $json = httpGet($url, 'Content-Length', true);
-    return substr($headerStr, 15);
+    return 0 + substr($headerStr, 15);
 }
 function getTagInfo($image, $tag) {
     global $registryAPI;

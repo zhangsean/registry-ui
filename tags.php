@@ -13,10 +13,10 @@ if (isset($json['errors'])) {
 	return;
 }
 echo "<h1>Docker Registry UI</h1>";
-echo "<b>Repository</b><br/><a href='$baseUrl'>$registryWeb</a>/<a href=''>".$json['name']."</a>";
+echo "<b>Repository</b><br/><a href='/'>$registryWeb</a>/<a href=''>".$json['name']."</a>";
 echo "<h3>Tags</h3><hr/>";
 echo "<table border=0 cellspacing=0 cellpadding=0>";
-echo "<tr><th width=100>Tag</th><th width=80>Layers</th><th width=100>Size</th><th width=100>Created</th></tr>";
+echo "<tr><th width=300>Tag</th><th width=80>Layers</th><th width=100>Size</th><th width=100>Created</th></tr>";
 foreach ($json['tags'] as $tag) {
 	echo "<tr><td><a href='manifests.php?image=$image&tag=$tag'>".$tag."</a></td>";
 	$tagInfo = getTagInfo($image, $tag);
