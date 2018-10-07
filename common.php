@@ -83,9 +83,9 @@ function getRepInfo($image) {
     );
 }
 function size($byte) {
-	if (!is_numeric($byte)) {
-		return $byte;
-	} else if($byte < 1024) {
+    if (!is_numeric($byte)) {
+        return $byte;
+    } else if($byte < 1024) {
         $unit = "B";
     } else if($byte < 1048576) {
         $byte = round_dp($byte/1024, 2);
