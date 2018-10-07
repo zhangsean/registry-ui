@@ -3,6 +3,7 @@
 $registryWeb = empty($_ENV['REGISTRY_WEB']) ? 'localhost:5000' : $_ENV['REGISTRY_WEB'];
 $registryAPI = empty($_ENV['REGISTRY_API']) ? 'http://localhost:5000/v2' : $_ENV['REGISTRY_API'];
 $baseUrl = 'http://'.$_SERVER['HTTP_HOST'];
+$showRepositorySize = empty($_ENV['SHOW_REPOSITORY_SIZE']) ? false : $_ENV['SHOW_REPOSITORY_SIZE'];
 
 $headerStr;
 $headerKey;
@@ -66,10 +67,14 @@ function getRepInfo($image) {
 	$totalSize = 0;
 	$totalTags = 0;
 	if (!empty($json['tags'])) {
-		foreach ($json['tags'] as $tag) {
-			$totalSize += getTagInfo($image, $tag)['Size'];
-			$totalTags += 1;
-		}
+		if (!$showRepositorySize) {
+			$totalTags = count($json['tags']);
+			$totalSize = '-';
+		} else {
+			foreach ($json['tags'] as $tag) {
+				$totalSize += getTagInfo($image, $tag)['Size'];
+				$totalTags += 1;
+			}
 	}
 	return array(
 		'Tags' => $totalTags,
