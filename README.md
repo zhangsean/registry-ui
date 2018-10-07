@@ -12,4 +12,9 @@ If you visit registry with a uri `hub.local.com`, you may start the web ui using
 ```
 docker run -itd -p 5080:80 -e REGISTRY_API=http://10.0.1.100:5000/v2 -e REGISTRY_WEB=hub.local.com zhangsean/registry-ui
 ```
+
+To enable the feature showing image total size in home page, which may cause homepage loading slowly, you may start the registry UI using this environment variables `-e SHOW_IMAGE_SIZE=true`, e.g.
+```
+docker run -itd -p 5080:80 -e REGISTRY_API=http://10.0.1.100:5000/v2 -e REGISTRY_WEB=hub.local.com -e SHOW_IMAGE_SIZE=true zhangsean/registry-ui
+```
 Visit http://server-ip:5080/ for your registry ui.
