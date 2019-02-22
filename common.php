@@ -1,8 +1,10 @@
 <?php
+error_reporting(0);
+set_time_limit(100);
 
 $registryWeb = empty($_ENV['REGISTRY_WEB']) ? 'localhost:5000' : $_ENV['REGISTRY_WEB'];
 $registryAPI = empty($_ENV['REGISTRY_API']) ? 'http://localhost:5000/v2' : $_ENV['REGISTRY_API'];
-$showImageSize = empty($_ENV['SHOW_IMAGE_SIZE']) ? false : $_ENV['SHOW_IMAGE_SIZE'];
+$showImageSize = empty($_ENV['SHOW_IMAGE_SIZE']) ? 0 : $_ENV['SHOW_IMAGE_SIZE'];
 
 $headerStr;
 $headerKey;
@@ -40,16 +42,27 @@ function curlHeaderCallback($curl, $strHeader) {
 function getBlobSize($image, $digest) {
     global $registryAPI, $headerStr;
     $url = "/$image/blobs/$digest";
-    $json = httpGet($url, 'Content-Length', true);
+    httpGet($url, 'Content-Length', true);
     return 0 + substr($headerStr, 15);
 }
 function getTagInfo($image, $tag) {
-    global $registryAPI;
+    global $registryAPI, $showImageSize;
     $url = "/$image/manifests/$tag";
     $json = httpGet($url);
+    if (isset($json['errors'])) {
+        return array(
+            'Layeys' => 0,
+            'Size' => 0,
+            'Created' => ''
+        );
+    }
     $tagSize = 0;
-    foreach ($json['fsLayers'] as $value) {
-        $tagSize += getBlobSize($image, $value['blobSum']);
+    if (!$showImageSize) {
+        $tagSize = '-';
+    } else {
+        foreach ($json['fsLayers'] as $value) {
+            $tagSize += getBlobSize($image, $value['blobSum']);
+        }
     }
     $infoV1 = json_decode($json['history'][0]['v1Compatibility'], true);
     $lastTime = date('Y-m-d H:i:s', strtotime(explode('.', $infoV1['created'])[0]));
@@ -60,7 +73,7 @@ function getTagInfo($image, $tag) {
     );
 }
 function getRepInfo($image) {
-    global $registryAPI;
+    global $registryAPI, $showImageSize;
     $url = "/$image/tags/list";
     $json = httpGet($url);
     $totalSize = 0;
@@ -78,7 +91,7 @@ function getRepInfo($image) {
     }
     return array(
         'Tags' => $totalTags,
-        'Size' => $totalSize
+        'Size' => empty($totalSize) ? '-' : $totalSize
     );
 }
 function size($byte) {
